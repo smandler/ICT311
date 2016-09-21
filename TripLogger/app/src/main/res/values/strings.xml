@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Trip Logger</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="trip_title_hint">Enter a title for the trip.</string>
+    <string name="trip_title_label">Title</string>
+    <string name="trip_details_label">Details</string>
+    <string name="trip_destination_hint">Enter a destination for the trip.</string>
+    <string name="trip_comments_hint">Enter you comments about the trip.</string>
+    <string name="trip_solved_label">Solved</string>
+
+    <string name="date_picker_title">Date of trip:</string>
+    <string name="new_trip">Log</string>
+    <string name="show_subtitle">Settings</string>
+    <string name="hide_subtitle">Hide Subtitle</string>
+    <string name="subtitle_format">%1$s trips</string>
+    <string name="trip_type">Choose a trip type</string>
+    <string name="trip_type_label">Type</string>
+    <string name="trip_duration_label">Duration</string>
+    <string name="trip_destination_label">Destination</string>
+
+    <string-array name="trip_type_list">
+        <item>Work</item>
+        <item>Personal</item>
+        <item>Commute</item>
+    </string-array>
+    <string name="title_activity_maps">Map</string>
+</resources>

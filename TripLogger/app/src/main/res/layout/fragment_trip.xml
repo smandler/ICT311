@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+    android:weightSum="1">
+    <include layout="@layout/view_camera_and_title" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/trip_destination_label"
+            android:id="@+id/textView"
+            android:layout_margin="4dp"
+            />
+
+        <EditText
+            android:id="@+id/trip_destination"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_marginRight="16dp"
+            android:hint="@string/trip_destination_hint"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/trip_type_label"
+            android:textStyle="bold"
+            android:layout_margin="4dp"
+            android:id="@+id/textView2"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/trip_type"
+            android:spinnerMode="dropdown"
+            android:entries="@array/trip_type_list"
+            android:layout_marginLeft="56dp"
+            android:layout_marginRight="16dp"
+            android:prompt="@+id/trip_type" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/trip_duration_label"
+            android:textStyle="bold"
+            android:layout_margin="4dp"
+            android:id="@+id/textView3"/>
+
+        <EditText
+            android:layout_width="78dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/trip_duration" />
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/trip_comments"
+        android:hint="@string/trip_comments_hint"
+        android:layout_weight="0.10"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:minLines="2"
+        android:maxLines="3"
+        android:lines="2" />
+
+</LinearLayout>
