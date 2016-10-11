@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="wrap_content"
     android:weightSum="1">
-    <include layout="@layout/view_camera_and_title" />
+    <include layout="@layout/trip_view" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -68,8 +68,12 @@
             android:ems="10"
             android:id="@+id/trip_duration" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <EditText
+        <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
@@ -82,5 +86,13 @@
         android:minLines="2"
         android:maxLines="3"
         android:lines="2" />
+
+    <ViewStub
+        android:id="@+id/layout_btn"
+        android:inflatedId="@+id/trip_btn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.75" />
+    </LinearLayout>
 
 </LinearLayout>

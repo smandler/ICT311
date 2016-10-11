@@ -1,6 +1,7 @@
 package com.bignerdranch.android.triplogger;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -14,10 +15,12 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import java.io.File;
 import java.util.Date;
@@ -62,15 +65,20 @@ public class TripFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-
-        TripManager.get(getActivity())
-                .updateTrip(mTrip);
+        if (mTrip.getTitle() != "") {
+            TripManager.get(getActivity())
+                    .updateTrip(mTrip);
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_trip, container, false);
+
+        ViewStub stub = (ViewStub) v.findViewById(R.id.layout_btn);
+        stub.setLayoutResource(R.layout.trip_btn);
+        View inflated = stub.inflate();
 
         mTitleField = (EditText) v.findViewById(R.id.trip_title);
         mTitleField.setText(mTrip.getTitle());

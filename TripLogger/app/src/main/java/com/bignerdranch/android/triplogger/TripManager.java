@@ -61,6 +61,14 @@ public class TripManager {
                 new String[]{uuidString});
     }
 
+    public void deleteTrip(Trip trip) {
+        String uuidString = trip.getId().toString();
+        ContentValues values = getContentValues(trip);
+
+        mDatabase.delete(TripTable.NAME, TripTable.Cols.UUID + " = ?",
+                new String[]{uuidString});
+    }
+
     private TripCursorWrapper queryTrips(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
                 TripTable.NAME,

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginTop="16dp"
+    android:orientation="horizontal"
+    android:weightSum="1"
+    android:gravity="bottom">
+
+    <ImageButton android:id="@+id/trip_delete"
+                 android:layout_height="74dp"
+                 android:src="@android:drawable/ic_menu_delete"
+        android:layout_width="wrap_content"
+        android:layout_weight="0.50" />
+
+    <ImageButton android:id="@+id/trip_gps"
+            android:layout_height="74dp"
+            android:src="@android:drawable/ic_menu_mapmode"
+        android:layout_width="wrap_content"
+        android:layout_weight="0.50" />
+
+</LinearLayout>
