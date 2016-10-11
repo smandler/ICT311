@@ -44,6 +44,10 @@ public class TripFragment extends Fragment {
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
 
+    private ImageView mDeleteButton;
+    private ImageView mSaveButton;
+    private ImageView mCancelButton;
+
     public static TripFragment newInstance(UUID tripId) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_TRIP_ID, tripId);
@@ -65,9 +69,12 @@ public class TripFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (mTrip.getTitle() != "") {
+        if (mTrip.getTitle() != null) {
             TripManager.get(getActivity())
                     .updateTrip(mTrip);
+        } else {
+            TripManager.get(getActivity())
+                    .deleteTrip(mTrip);
         }
     }
 
@@ -75,10 +82,46 @@ public class TripFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_trip, container, false);
-
         ViewStub stub = (ViewStub) v.findViewById(R.id.layout_btn);
-        stub.setLayoutResource(R.layout.trip_btn);
-        View inflated = stub.inflate();
+
+        if (mTrip.getTitle() != null) {
+            stub.setLayoutResource(R.layout.trip_edit);
+            View inflated = stub.inflate();
+
+            mDeleteButton = (ImageView) v.findViewById(R.id.trip_delete);
+            mDeleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TripManager.get(getActivity())
+                            .deleteTrip(mTrip);
+                    getActivity().onBackPressed();
+                }
+            });
+        } else {
+            stub.setLayoutResource(R.layout.trip_add);
+            View inflated = stub.inflate();
+
+            mCancelButton= (ImageView) v.findViewById(R.id.trip_cancel);
+            mCancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TripManager.get(getActivity())
+                            .deleteTrip(mTrip);
+                    getActivity().onBackPressed();
+                }
+            });
+
+            mSaveButton = (ImageView) v.findViewById(R.id.trip_save);
+            mSaveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TripManager.get(getActivity())
+                            .updateTrip(mTrip);
+                    getActivity().onBackPressed();
+                }
+            });
+        }
+
 
         mTitleField = (EditText) v.findViewById(R.id.trip_title);
         mTitleField.setText(mTrip.getTitle());

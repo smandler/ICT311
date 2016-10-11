@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.bignerdranch.android.triplogger.database.TripDbSchema.TripTable;
+import com.bignerdranch.android.triplogger.database.TripDbSchema.SettingsTable;
 
 public class TripBaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "TripBaseHelper";
@@ -25,6 +26,15 @@ public class TripBaseHelper extends SQLiteOpenHelper {
                 TripTable.Cols.DESTINATION + ", " +
                 TripTable.Cols.DATE + ", " +
                 TripTable.Cols.DURATION +
+                ")"
+        );
+        db.execSQL("create table " + SettingsTable.NAME + "(" +
+                " _id integer primary key autoincrement, " +
+                SettingsTable.Cols.UUID + ", " +
+                SettingsTable.Cols.NAME + ", " +
+                SettingsTable.Cols.EMAIL + ", " +
+                SettingsTable.Cols.GENDER + ", " +
+                SettingsTable.Cols.COMMENT +
                 ")"
         );
     }

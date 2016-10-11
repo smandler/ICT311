@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
     android:weightSum="1">
@@ -18,13 +19,15 @@
             android:layout_margin="4dp"
             />
 
-        <EditText
-            android:id="@+id/trip_destination"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="26dp"
-            android:layout_marginRight="16dp"
-            android:hint="@string/trip_destination_hint"/>
+
+
+    <EditText
+        android:id="@+id/trip_destination"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="16dp"
+        android:hint="@string/trip_destination_hint"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -51,7 +54,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="1">
 
         <TextView
             android:layout_width="wrap_content"
@@ -67,7 +71,21 @@
             android:inputType="number"
             android:ems="10"
             android:id="@+id/trip_duration" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/trip_gps"
+            android:layout_weight="18.25"
+            android:background="@color/highlighted_text_material_dark"
+            android:editable="false"
+            android:clickable="false"
+            android:focusable="false"
+            android:enabled="false"
+            android:layout_marginLeft="20dp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,17 +93,17 @@
 
         <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="82dp"
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/trip_comments"
         android:hint="@string/trip_comments_hint"
-        android:layout_weight="0.10"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:minLines="2"
         android:maxLines="3"
-        android:lines="2" />
+        android:lines="2"
+            android:singleLine="false" />
 
     <ViewStub
         android:id="@+id/layout_btn"
