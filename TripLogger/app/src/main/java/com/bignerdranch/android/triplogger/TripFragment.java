@@ -16,11 +16,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 
 import java.io.File;
 import java.util.Date;
@@ -39,6 +41,8 @@ public class TripFragment extends Fragment {
     private EditText mTitleField;
     private EditText mDestinationField;
     private EditText mDurationField;
+    private Spinner mTypeField;
+    private EditText mCommentField;
     private Button mDateButton;
 
     private ImageButton mPhotoButton;
@@ -158,6 +162,42 @@ public class TripFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+
+        mCommentField = (EditText) v.findViewById(R.id.trip_comments);
+        mCommentField.setText(mTrip.getComment());
+        mCommentField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mTrip.setComment(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        mTypeField = (Spinner) v.findViewById(R.id.trip_type);
+        if (mTrip.getType() != null)
+            mTypeField.setSelection(Integer.parseInt(mTrip.getType()));
+
+        mTypeField.setOnItemSelectedListener(new TripTypeOnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int pos, long id) {
+                mTrip.setType(Integer.toString(pos));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Another interface callback
             }
         });
 

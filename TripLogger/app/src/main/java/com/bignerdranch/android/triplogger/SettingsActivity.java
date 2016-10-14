@@ -9,19 +9,17 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
-import java.util.List;
-import java.util.UUID;
 
-public class TripActivity extends AppCompatActivity {
-    private static final String EXTRA_TRIP_ID =
-            "com.bignerdranch.android.triplogger.trip_id";
+public class SettingsActivity extends AppCompatActivity {
+    private static final String EXTRA_SETTINGS_ID =
+            "com.bignerdranch.android.triplogger.settings_id";
 
     private ViewPager mViewPager;
-    private List<Trip> mTrips;
+    private Settings mSettings;
 
-    public static Intent trip(Context packageContext, UUID tripId) {
-        Intent intent = new Intent(packageContext, TripActivity.class);
-        intent.putExtra(EXTRA_TRIP_ID, tripId);
+    public static Intent settings (Context packageContext, String settingsId) {
+        Intent intent = new Intent(packageContext, SettingsActivity.class);
+        intent.putExtra(EXTRA_SETTINGS_ID, settingsId);
         return intent;
     }
 
@@ -30,25 +28,25 @@ public class TripActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trip_pager);
 
-        UUID tripId = (UUID) getIntent()
-                .getSerializableExtra(EXTRA_TRIP_ID);
+        String tripId = (String) getIntent()
+                .getSerializableExtra(EXTRA_SETTINGS_ID);
 
         mViewPager = (ViewPager) findViewById(R.id.activity_trip_pager_view_pager);
 
-        mTrips = TripManager.get(this).getTrips();
+        mSettings = TripManager.get(this).getSettings();
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
 
             @Override
             public Fragment getItem(int position) {
-                Trip trip = mTrips.get(position);
-                return TripFragment.newInstance(trip.getId());
+                String id = mSettings.getId();
+                return SettingsFragment.newInstance(id);
             }
 
             @Override
             public int getCount() {
-                return mTrips.size();
+                return 1;
             }
         });
 
@@ -58,21 +56,11 @@ public class TripActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                Trip trip = mTrips.get(position);
-                if (trip.getTitle() != null) {
-                    setTitle(trip.getTitle());
-                }
             }
 
             @Override
             public void onPageScrollStateChanged(int state) { }
         });
 
-        for (int i = 0; i < mTrips.size(); i++) {
-            if (mTrips.get(i).getId().equals(tripId)) {
-                mViewPager.setCurrentItem(i);
-                break;
-            }
-        }
     }
 }

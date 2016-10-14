@@ -14,43 +14,58 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="@string/trip_destination_label"
+            android:text="@string/settings_name_label"
             android:id="@+id/textView"
             android:layout_margin="4dp"
-            />
+            android:textSize="18sp" />
 
-
-
-    <EditText
-        android:id="@+id/trip_destination"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="26dp"
-        android:layout_marginRight="16dp"
-        android:hint="@string/trip_destination_hint"/>
+        <EditText
+            android:id="@+id/settings_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_marginRight="16dp"
+            android:hint="@string/settings_name_hint"/>
     </LinearLayout>
+
+    <View android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/accent_material_light"
+        android:layout_below="@+id/settings_name"/>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="1">
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/trip_type_label"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/settings_email_label"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:layout_margin="4dp"
             android:id="@+id/textView2"/>
 
-        <Spinner
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/trip_type"
-            android:spinnerMode="dropdown"
-            android:entries="@array/trip_type_list"
-            android:layout_marginLeft="56dp"
-            android:layout_marginRight="16dp"
-            android:prompt="@+id/trip_type" />
+            android:inputType="textEmailAddress"
+            android:text="@string/settings_email_hint"
+            android:layout_marginLeft="26dp"
+            android:ems="10"
+            android:id="@+id/settings_email"
+            android:layout_weight="2" />
+
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,50 +75,49 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/trip_duration_label"
+            android:text="@string/settings_gender_label"
             android:textStyle="bold"
+            android:textSize="18sp"
             android:layout_margin="4dp"
-            android:id="@+id/textView3"/>
+            android:id="@+id/textView3"
+            android:labelFor="@+id/gender_list" />
 
-        <EditText
-            android:layout_width="78dp"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/trip_duration" />
-
-        <EditText
+        <Spinner
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:id="@+id/trip_gps"
-            android:layout_weight="18.25"
-            android:background="@color/highlighted_text_material_dark"
-            android:editable="false"
-            android:clickable="false"
-            android:focusable="false"
-            android:enabled="false"
-            android:layout_marginLeft="20dp" />
+            android:layout_height="match_parent"
+            android:id="@+id/trip_type"
+            android:spinnerMode="dropdown"
+            android:entries="@array/gender_list"
+            android:layout_marginLeft="26dp"
+            android:layout_marginRight="16dp"
+            android:prompt="@+id/gender_list"
+            android:layout_weight="1" />
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <View android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/accent_material_light"
+        android:layout_below="@+id/gender_list"/>
 
-        <EditText
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="82dp"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:id="@+id/trip_comments"
-        android:hint="@string/trip_comments_hint"
+        android:id="@+id/settings_comments"
+        android:hint="@string/settings_comment_hint"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:minLines="2"
         android:maxLines="3"
-        android:lines="2" />
+        android:lines="2"
+        android:layout_margin="16dp"
+        android:lineSpacingExtra="1sp" />
 
-    </LinearLayout>
+    <View android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="@color/accent_material_light"
+        android:layout_below="@+id/settings_comments"/>
 
 </LinearLayout>

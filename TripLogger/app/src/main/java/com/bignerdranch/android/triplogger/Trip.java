@@ -9,6 +9,8 @@ public class Trip {
     private String mTitle;
     private String mDestination;
     private String mDuration;
+    private String mType;
+    private String mComment;
     private Date mDate;
 
     public Trip() {
@@ -26,15 +28,13 @@ public class Trip {
     public String getTitle() {
         return mTitle;
     }
-
-    public String getDestination() {
-        return mDestination;
-    }
-
     public void setTitle(String title) {
         mTitle = title;
     }
 
+    public String getDestination() {
+        return mDestination;
+    }
     public void setDestination(String destination) {
         mDestination = destination;
     }
@@ -42,15 +42,25 @@ public class Trip {
     public Date getDate() {
         return mDate;
     }
-
     public void setDate(Date date) {
         mDate = date;
+    }
+
+    public String getType() {
+        return mType;
+    }
+    public void setType(String type) { mType = type; }
+
+    public String getComment() {
+        return mComment;
+    }
+    public void setComment(String comment) {
+        mComment = comment;
     }
 
     public String getDuration() {
         return mDuration;
     }
-
     public void setDuration(String duration) {
         mDuration = duration;
     }

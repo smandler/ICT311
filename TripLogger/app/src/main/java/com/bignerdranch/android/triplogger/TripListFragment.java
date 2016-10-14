@@ -11,7 +11,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.List;
@@ -66,11 +65,15 @@ public class TripListFragment extends Fragment {
                 Trip trip = new Trip();
                 TripManager.get(getActivity()).addTrip(trip);
                 Intent intent = TripActivity
-                        .newIntent(getActivity(), trip.getId());
+                        .trip(getActivity(), trip.getId());
                 startActivity(intent);
                 return true;
             case R.id.menu_item_settings:
+                Settings mSettings = TripManager.get(getActivity()).getSettings();
 
+                Intent settingsIntent = SettingsActivity
+                        .settings(getActivity(), mSettings.getId());
+                startActivity(settingsIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -116,7 +119,7 @@ public class TripListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Intent intent = TripActivity.newIntent(getActivity(), mTrip.getId());
+            Intent intent = TripActivity.trip(getActivity(), mTrip.getId());
             startActivity(intent);
         }
     }

@@ -9,6 +9,7 @@ import android.os.Environment;
 import com.bignerdranch.android.triplogger.database.TripBaseHelper;
 import com.bignerdranch.android.triplogger.database.TripCursorWrapper;
 
+import com.bignerdranch.android.triplogger.database.TripDbSchema.SettingsTable;
 import com.bignerdranch.android.triplogger.database.TripDbSchema.TripTable;
 
 import java.io.File;
@@ -35,26 +36,29 @@ public class TripManager {
                 .getWritableDatabase();
     }
 
-    private static ContentValues getContentValues(Trip trip) {
+    // working with trips
+    private static ContentValues getTripValues(Trip trip) {
         ContentValues values = new ContentValues();
         values.put(TripTable.Cols.UUID, trip.getId().toString());
         values.put(TripTable.Cols.TITLE, trip.getTitle());
         values.put(TripTable.Cols.DESTINATION, trip.getDestination());
         values.put(TripTable.Cols.DATE, trip.getDate().getTime());
         values.put(TripTable.Cols.DURATION, trip.getDuration());
+        values.put(TripTable.Cols.TYPE, trip.getType());
+        values.put(TripTable.Cols.COMMENT, trip.getComment());
 
         return values;
     }
 
     public void addTrip(Trip c) {
-        ContentValues values = getContentValues(c);
+        ContentValues values = getTripValues(c);
 
         mDatabase.insert(TripTable.NAME, null, values);
     }
 
     public void updateTrip(Trip trip) {
         String uuidString = trip.getId().toString();
-        ContentValues values = getContentValues(trip);
+        ContentValues values = getTripValues(trip);
 
         mDatabase.update(TripTable.NAME, values,
                 TripTable.Cols.UUID + " = ?",
@@ -63,7 +67,7 @@ public class TripManager {
 
     public void deleteTrip(Trip trip) {
         String uuidString = trip.getId().toString();
-        ContentValues values = getContentValues(trip);
+        ContentValues values = getTripValues(trip);
 
         mDatabase.delete(TripTable.NAME, TripTable.Cols.UUID + " = ?",
                 new String[]{uuidString});
@@ -125,4 +129,57 @@ public class TripManager {
         }
         return new File(externalFilesDir, trip.getPhotoFileName());
     }
+
+    // working with settings - only one record
+
+    private ContentValues getSettingsValues(Settings settings) {
+        ContentValues values = new ContentValues();
+
+        values.put(SettingsTable.Cols.ID, settings.getId());
+        values.put(SettingsTable.Cols.NAME, settings.getName());
+        values.put(SettingsTable.Cols.EMAIL, settings.getEmail());
+        values.put(SettingsTable.Cols.GENDER, settings.getGender());
+        values.put(SettingsTable.Cols.COMMENT, settings.getComment());
+
+        return values;
+    }
+
+    public void updateSettings(Settings settings) {
+        ContentValues values = getSettingsValues(settings);
+        String id = "1";
+        mDatabase.update(SettingsTable.NAME, values,
+                SettingsTable.Cols.ID + " = ?",
+                new String[]{id});
+    }
+
+    private TripCursorWrapper querySettings() {
+        Cursor cursor = mDatabase.query(
+                SettingsTable.NAME,
+                null, // Columns - null selects all columns
+                null,
+                null,
+                null, // groupBy
+                null, // having
+                null  // orderBy
+        );
+
+        return new TripCursorWrapper(cursor);
+    }
+
+    public Settings getSettings() {
+        TripCursorWrapper cursor = querySettings();
+
+        try {
+            if (cursor.getCount() == 0) {
+                return null;
+            }
+
+            cursor.moveToFirst();
+            return cursor.getSettings();
+        } finally {
+            cursor.close();
+        }
+    }
+
+
 }

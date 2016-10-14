@@ -25,17 +25,21 @@ public class TripBaseHelper extends SQLiteOpenHelper {
                 TripTable.Cols.TITLE + ", " +
                 TripTable.Cols.DESTINATION + ", " +
                 TripTable.Cols.DATE + ", " +
+                TripTable.Cols.TYPE + ", " +
+                TripTable.Cols.COMMENT + ", " +
                 TripTable.Cols.DURATION +
                 ")"
         );
         db.execSQL("create table " + SettingsTable.NAME + "(" +
-                " _id integer primary key autoincrement, " +
-                SettingsTable.Cols.UUID + ", " +
+                SettingsTable.Cols.ID + ", " +
                 SettingsTable.Cols.NAME + ", " +
                 SettingsTable.Cols.EMAIL + ", " +
                 SettingsTable.Cols.GENDER + ", " +
                 SettingsTable.Cols.COMMENT +
                 ")"
+        );
+        // only one record/ only updates after
+        db.execSQL("insert into " + SettingsTable.NAME + " values ('1', '', '', '', '')"
         );
     }
 
