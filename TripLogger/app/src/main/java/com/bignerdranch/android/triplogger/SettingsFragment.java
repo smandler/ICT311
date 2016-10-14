@@ -31,14 +31,9 @@ public class SettingsFragment extends Fragment {
     private static final String ARG_SETTINGS_ID = "settings_id";
     private Settings mSettings;
     private EditText mNameField;
-
-    private File mPhotoFile;
-
-    private EditText mDestinationField;
-    private EditText mDurationField;
-    private Spinner mTypeField;
+    private EditText mEmailField;
+    private Spinner mGenderField;
     private EditText mCommentField;
-    private Button mDateButton;
 
 
     public static SettingsFragment newInstance(String id) {
@@ -85,6 +80,60 @@ public class SettingsFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+
+        mEmailField = (EditText) v.findViewById(R.id.settings_email);
+        mEmailField.setText(mSettings.getEmail());
+        mEmailField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mSettings.setEmail(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        mCommentField = (EditText) v.findViewById(R.id.settings_comments);
+        mCommentField.setText(mSettings.getComment());
+        mCommentField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mSettings.setComment(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        mGenderField = (Spinner) v.findViewById(R.id.trip_type);
+        mGenderField.setSelection(Integer.parseInt(mSettings.getGender()));
+
+        mGenderField.setOnItemSelectedListener(new TripTypeOnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int pos, long id) {
+                mSettings.setGender(Integer.toString(pos));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Another interface callback
             }
         });
 

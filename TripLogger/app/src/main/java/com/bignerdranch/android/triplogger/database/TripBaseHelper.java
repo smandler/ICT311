@@ -39,7 +39,7 @@ public class TripBaseHelper extends SQLiteOpenHelper {
                 ")"
         );
         // only one record/ only updates after
-        db.execSQL("insert into " + SettingsTable.NAME + " values ('1', '', '', '', '')"
+        db.execSQL("insert into " + SettingsTable.NAME + " values ('1', '', '', '0', '')"
         );
     }
 
