@@ -43,6 +43,7 @@ public class TripFragment extends Fragment {
     private EditText mDurationField;
     private Spinner mTypeField;
     private EditText mCommentField;
+    private EditText mGpsField;
     private Button mDateButton;
 
     private ImageButton mPhotoButton;
@@ -176,6 +177,25 @@ public class TripFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mTrip.setComment(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        mGpsField = (EditText) v.findViewById(R.id.trip_gps);
+        mGpsField.setText(mTrip.getGps());
+        mGpsField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mTrip.setGps(s.toString());
             }
 
             @Override

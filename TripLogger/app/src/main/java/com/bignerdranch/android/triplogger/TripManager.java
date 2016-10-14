@@ -146,7 +146,7 @@ public class TripManager {
 
     public void updateSettings(Settings settings) {
         ContentValues values = getSettingsValues(settings);
-        String id = "1";
+        String id = settings.getId();
         mDatabase.update(SettingsTable.NAME, values,
                 SettingsTable.Cols.ID + " = ?",
                 new String[]{id});

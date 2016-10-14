@@ -26,6 +26,7 @@ public class TripCursorWrapper extends CursorWrapper {
         String duration = getString(getColumnIndex(TripTable.Cols.DURATION));
         String comment = getString(getColumnIndex(TripTable.Cols.COMMENT));
         String type = getString(getColumnIndex(TripTable.Cols.TYPE));
+        String gps = getString(getColumnIndex(TripTable.Cols.GPS));
 
         Trip trip = new Trip(UUID.fromString(uuidString));
         trip.setTitle(title);
@@ -34,17 +35,20 @@ public class TripCursorWrapper extends CursorWrapper {
         trip.setDuration(duration);
         trip.setComment(comment);
         trip.setType(type);
+        trip.setGps(gps);
 
         return trip;
     }
 
     public Settings getSettings() {
+        String id = getString(getColumnIndex(SettingsTable.Cols.ID));
         String name = getString(getColumnIndex(SettingsTable.Cols.NAME));
         String email = getString(getColumnIndex(SettingsTable.Cols.EMAIL));
         String gender = getString(getColumnIndex(SettingsTable.Cols.GENDER));
         String comment = getString(getColumnIndex(SettingsTable.Cols.COMMENT));
 
         Settings settings = new Settings();
+        settings.setId(id);
         settings.setName(name);
         settings.setEmail(email);
         settings.setGender(gender);

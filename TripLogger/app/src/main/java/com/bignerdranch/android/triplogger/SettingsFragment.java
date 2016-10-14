@@ -30,6 +30,7 @@ public class SettingsFragment extends Fragment {
 
     private static final String ARG_SETTINGS_ID = "settings_id";
     private Settings mSettings;
+    private EditText mIdField;
     private EditText mNameField;
     private EditText mEmailField;
     private Spinner mGenderField;
@@ -63,6 +64,25 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_settings, container, false);
+
+        mIdField = (EditText) v.findViewById(R.id.settings_id);
+        mIdField.setText(mSettings.getId());
+        mIdField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mSettings.setId(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         mNameField = (EditText) v.findViewById(R.id.settings_name);
         mNameField.setText(mSettings.getName());

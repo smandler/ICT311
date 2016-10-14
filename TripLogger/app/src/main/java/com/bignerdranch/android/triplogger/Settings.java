@@ -11,15 +11,13 @@ public class Settings {
     private String mGender;
     private String mComment;
 
-    public Settings() {
-        this("1");
-    }
+    public Settings() { }
 
-    public Settings(String id) {
-        mId = id;
-    }
     public String getId() {
         return mId;
+    }
+    public void setId(String id) {
+        mId = id;
     }
 
     public String getName() {

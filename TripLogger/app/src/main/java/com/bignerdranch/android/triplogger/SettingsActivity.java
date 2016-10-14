@@ -11,15 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 
 
 public class SettingsActivity extends AppCompatActivity {
-    private static final String EXTRA_SETTINGS_ID =
-            "com.bignerdranch.android.triplogger.settings_id";
-
     private ViewPager mViewPager;
     private Settings mSettings;
 
     public static Intent settings (Context packageContext, String settingsId) {
         Intent intent = new Intent(packageContext, SettingsActivity.class);
-        intent.putExtra(EXTRA_SETTINGS_ID, settingsId);
         return intent;
     }
 
@@ -27,9 +23,6 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trip_pager);
-
-        String tripId = (String) getIntent()
-                .getSerializableExtra(EXTRA_SETTINGS_ID);
 
         mViewPager = (ViewPager) findViewById(R.id.activity_trip_pager_view_pager);
 

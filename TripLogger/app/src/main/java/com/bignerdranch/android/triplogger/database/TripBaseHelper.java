@@ -27,6 +27,7 @@ public class TripBaseHelper extends SQLiteOpenHelper {
                 TripTable.Cols.DATE + ", " +
                 TripTable.Cols.TYPE + ", " +
                 TripTable.Cols.COMMENT + ", " +
+                TripTable.Cols.GPS + ", " +
                 TripTable.Cols.DURATION +
                 ")"
         );
@@ -39,7 +40,7 @@ public class TripBaseHelper extends SQLiteOpenHelper {
                 ")"
         );
         // only one record/ only updates after
-        db.execSQL("insert into " + SettingsTable.NAME + " values ('1', '', '', '0', '')"
+        db.execSQL("insert into " + SettingsTable.NAME + " values ('1083669', 'Svetlana Mandler', 'mandler@mail.ru', '1', 'ICT311. Trip Logger.')"
         );
     }
 
