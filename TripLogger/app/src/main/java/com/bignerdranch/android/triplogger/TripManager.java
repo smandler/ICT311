@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
+import android.util.Log;
 
 import com.bignerdranch.android.triplogger.database.TripBaseHelper;
 import com.bignerdranch.android.triplogger.database.TripCursorWrapper;
@@ -46,6 +47,8 @@ public class TripManager {
         values.put(TripTable.Cols.DURATION, trip.getDuration());
         values.put(TripTable.Cols.TYPE, trip.getType());
         values.put(TripTable.Cols.COMMENT, trip.getComment());
+        values.put(TripTable.Cols.LAT, trip.getLatitude());
+        values.put(TripTable.Cols.LON, trip.getLongtitude());
 
         return values;
     }
@@ -59,7 +62,7 @@ public class TripManager {
     public void updateTrip(Trip trip) {
         String uuidString = trip.getId().toString();
         ContentValues values = getTripValues(trip);
-
+        Log.d("UPDATE", "" + values.toString());
         mDatabase.update(TripTable.NAME, values,
                 TripTable.Cols.UUID + " = ?",
                 new String[]{uuidString});

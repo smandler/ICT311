@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -12,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,20 +24,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
+
+import com.google.android.gms.location.LocationListener;
 
 import java.io.File;
 import java.util.Date;
 import java.util.UUID;
 
-public class TripFragment extends Fragment {
+public class TripFragment extends Fragment implements LocationListener {
 
     private static final String ARG_TRIP_ID = "trip_id";
     private static final String DIALOG_DATE = "DialogDate";
 
     private static final int REQUEST_DATE = 0;
-    private static final int REQUEST_PHOTO= 2;
+    private static final int REQUEST_PHOTO = 2;
+    private static final int REQUEST_MAP = 0;
+
+    private LocationManager locationManager;
+    private Location location;
 
     private Trip mTrip;
     private File mPhotoFile;
@@ -52,6 +60,7 @@ public class TripFragment extends Fragment {
     private ImageView mDeleteButton;
     private ImageView mSaveButton;
     private ImageView mCancelButton;
+    private ImageView mGpsButton;
 
     public static TripFragment newInstance(UUID tripId) {
         Bundle args = new Bundle();
@@ -65,6 +74,9 @@ public class TripFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
         UUID tripId = (UUID) getArguments().getSerializable(ARG_TRIP_ID);
         mTrip = TripManager.get(getActivity()).getTrip(tripId);
@@ -92,6 +104,18 @@ public class TripFragment extends Fragment {
         if (mTrip.getTitle() != null) {
             stub.setLayoutResource(R.layout.trip_edit);
             View inflated = stub.inflate();
+
+            mGpsButton = (ImageView) v.findViewById(R.id.trip_map);
+            mGpsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = MapsActivity
+                            .maps(getActivity(), mTrip.getId());
+
+                    startActivityForResult(intent, REQUEST_MAP);
+                //    startActivity(intent);
+                }
+            });
 
             mDeleteButton = (ImageView) v.findViewById(R.id.trip_delete);
             mDeleteButton.setOnClickListener(new View.OnClickListener() {
@@ -186,7 +210,15 @@ public class TripFragment extends Fragment {
         });
 
         mGpsField = (EditText) v.findViewById(R.id.trip_gps);
-        mGpsField.setText(mTrip.getGps());
+        if (mTrip.getLatitude() == null){
+            double longitude = location.getLongitude();
+            double latitude = location.getLatitude();
+            mTrip.setLatitude(Double.toString(latitude));
+            mTrip.setLongtitude(Double.toString(longitude));
+            TripManager.get(getActivity())
+                    .updateTrip(mTrip);
+        }
+        mGpsField.setText(mTrip.getLatitude() + ";" + mTrip.getLongtitude());
         mGpsField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -195,7 +227,7 @@ public class TripFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mTrip.setGps(s.toString());
+               // mTrip.setGps(s.toString());
             }
 
             @Override
@@ -291,7 +323,13 @@ public class TripFragment extends Fragment {
             updateDate();
         } else if (requestCode == REQUEST_PHOTO) {
             updatePhotoView();
+        } else if (requestCode == REQUEST_MAP) {
+            updateGps();
         }
+    }
+
+    private void updateGps() {
+        Log.d("TAGGGG", "" + mTrip.getLongtitude());
     }
 
     private void updateDate() {
@@ -306,5 +344,10 @@ public class TripFragment extends Fragment {
                     mPhotoFile.getPath(), getActivity());
             mPhotoView.setImageBitmap(bitmap);
         }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
     }
 }

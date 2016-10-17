@@ -10,7 +10,8 @@ public class Trip {
     private String mDestination;
     private String mDuration;
     private String mType;
-    private String mGps;
+    private String mLat;
+    private String mLon;
     private String mComment;
     private Date mDate;
 
@@ -43,14 +44,15 @@ public class Trip {
     public Date getDate() {
         return mDate;
     }
-    public void setDate(Date date) {
-        mDate = date;
-    }
+    public void setDate(Date date) { mDate = date; }
 
-    public String getGps() {
-        return mGps;
+    public String getLongtitude() { return mLon; }
+    public void setLongtitude(String lon) { mLon = lon; }
+
+    public String getLatitude() {
+        return mLat;
     }
-    public void setGps(String gps) { mGps = gps; }
+    public void setLatitude(String lat) { mLat = lat; }
 
     public String getType() {
         return mType;

@@ -10,7 +10,8 @@ public class TripDbSchema {
             public static final String DATE = "date";
             public static final String DESTINATION = "destination";
             public static final String TYPE = "type";
-            public static final String GPS = "gps";
+            public static final String LAT = "lat";
+            public static final String LON = "lon";
             public static final String COMMENT = "comment";
             public static final String DURATION = "duration";
         }
