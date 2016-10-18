@@ -8,6 +8,6 @@
 
     <item
         android:id="@+id/menu_item_settings"
-        android:title="@string/show_subtitle"
+        android:title="@string/show_settings"
         app:showAsAction="always"/>
 </menu>

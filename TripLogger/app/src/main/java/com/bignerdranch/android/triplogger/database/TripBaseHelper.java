@@ -8,7 +8,6 @@ import com.bignerdranch.android.triplogger.database.TripDbSchema.TripTable;
 import com.bignerdranch.android.triplogger.database.TripDbSchema.SettingsTable;
 
 public class TripBaseHelper extends SQLiteOpenHelper {
-    private static final String TAG = "TripBaseHelper";
     private static final int VERSION = 2;
     private static final String DATABASE_NAME = "tripBase.db";
 

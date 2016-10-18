@@ -1,8 +1,5 @@
 package com.bignerdranch.android.triplogger;
 
-import java.util.Date;
-import java.util.UUID;
-
 public class Settings {
 
     private String mId;
